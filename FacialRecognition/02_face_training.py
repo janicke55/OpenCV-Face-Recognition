@@ -1,7 +1,7 @@
 ''''
 Training Multiple Faces stored on a DataBase:
 	==> Each face should have a unique numeric integer ID as 1, 2, 3, etc                       
-	==> LBPH computed model will be saved on trainer/ directory. (if it does not exist, pls create one)
+	==> LBPH computed dataModel will be saved on trainer/ directory. (if it does not exist, pls create one)
 	==> for using PIL, install pillow library with "pip install pillow"
 
 Based on original code by Anirban Kar: https://github.com/thecodacus/Face-Recognition    
@@ -16,7 +16,8 @@ from PIL import Image
 import os
 
 # Path for face image database
-path = 'dataset'
+path = "C:\\Users\\Jany\\Documents\\GitHub\\OpenCV-Face-Recognition\\dataset\\"
+
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml");
@@ -24,7 +25,12 @@ detector = cv2.CascadeClassifier("haarcascade_frontalface_default.xml");
 # function to get the images and label data
 def getImagesAndLabels(path):
 
-    imagePaths = [os.path.join(path,f) for f in os.listdir(path)]     
+    imagePaths = []
+    for dirname, _, filenames in os.walk(path):
+        for filename in filenames:
+            imagePaths.append(os.path.join(dirname,filename))
+
+    # imagePaths = [os.path.join(path,f) for f in os.listdir(path)]
     faceSamples=[]
     ids = []
 
@@ -46,8 +52,9 @@ print ("\n [INFO] Training faces. It will take a few seconds. Wait ...")
 faces,ids = getImagesAndLabels(path)
 recognizer.train(faces, np.array(ids))
 
-# Save the model into trainer/trainer.yml
-recognizer.write('trainer/trainer.yml') # recognizer.save() worked on Mac, but not on Pi
+# Save the dataModel into trainer/trainer.yml
+recognizer.save("C:\\Users\\Jany\\Documents\\GitHub\\OpenCV-Face-Recognition\\data_model\\trainer.yml") # recognizer.save() worked on Mac, but not on Pi
+# recognizer.write('trainer/trainer.yml') # recognizer.save() worked on Mac, but not on Pi
 
 # Print the numer of faces trained and end program
 print("\n [INFO] {0} faces trained. Exiting Program".format(len(np.unique(ids))))

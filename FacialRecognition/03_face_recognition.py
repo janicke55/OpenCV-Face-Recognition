@@ -1,7 +1,7 @@
 ''''
 Real Time Face Recogition
 	==> Each face stored on dataset/ dir, should have a unique numeric integer ID as 1, 2, 3, etc                       
-	==> LBPH computed model (trained faces) should be on trainer/ dir
+	==> LBPH computed dataModel (trained faces) should be on trainer/ dir
 Based on original code by Anirban Kar: https://github.com/thecodacus/Face-Recognition    
 
 Developed by Marcelo Rovai - MJRoBot.org @ 21Feb18  
@@ -12,8 +12,10 @@ import cv2
 import numpy as np
 import os 
 
+model_path = "C:\\Users\\Jany\\Documents\\GitHub\\OpenCV-Face-Recognition\\data_model\\trainer.yml"
+
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('trainer/trainer.yml')
+recognizer.read(model_path)
 cascadePath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath);
 
@@ -23,21 +25,24 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 id = 0
 
 # names related to ids: example ==> Marcelo: id=1,  etc
-names = ['None', 'Marcelo', 'Paula', 'Ilza', 'Z', 'W'] 
+# names = ['Jany']
+names = ['Neznama osoba', 'Jany Pircak', 'Paula', 'Ilza', 'Z', 'W']
 
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)
-cam.set(3, 640) # set video widht
-cam.set(4, 480) # set video height
+cam.set(3, 1280) # set video widht
+cam.set(4, 720) # set video height
+# cam.set(3, 640) # set video widht
+# cam.set(4, 480) # set video height
 
 # Define min window size to be recognized as a face
-minW = 0.1*cam.get(3)
-minH = 0.1*cam.get(4)
+minW = 0.03*cam.get(3)
+minH = 0.03*cam.get(4)
 
 while True:
 
     ret, img =cam.read()
-    img = cv2.flip(img, -1) # Flip vertically
+    # img = cv2.flip(img, -1) # Flip vertically
 
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
@@ -59,7 +64,7 @@ while True:
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
         else:
-            id = "unknown"
+            id = names[0]
             confidence = "  {0}%".format(round(100 - confidence))
         
         cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)

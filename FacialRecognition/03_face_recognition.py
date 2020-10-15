@@ -26,7 +26,7 @@ id = 0
 
 # names related to ids: example ==> Marcelo: id=1,  etc
 # names = ['Jany']
-names = ['Neznama osoba', 'Jany Pircak', 'Paula', 'Ilza', 'Z', 'W']
+names = ['Neznama osoba', 'Jany Pircak', 'Sona Pircakova', 'Maja Liptakova', 'Z', 'W']
 
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)

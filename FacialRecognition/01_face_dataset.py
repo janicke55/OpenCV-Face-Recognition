@@ -1,6 +1,6 @@
 ''''
-Capture multiple Faces from multiple users to be stored on a DataBase (dataset directory)
-	==> Faces will be stored on a directory: dataset/ (if does not exist, pls create one)
+Capture multiple Faces from multiple users to be stored on a DataBase (dataset_to_train directory)
+	==> Faces will be stored on a directory: dataset_to_train/ (if does not exist, pls create one)
 	==> Each face will have a unique numeric integer ID as 1, 2, 3, etc                       
 
 Based on original code by Anirban Kar: https://github.com/thecodacus/Face-Recognition    
@@ -12,7 +12,9 @@ Developed by Marcelo Rovai - MJRoBot.org @ 21Feb18
 import cv2
 import os
 
-path = "C:\\Users\\Jany\\Documents\\GitHub\\OpenCV-Face-Recognition\\dataset\\User"
+path = os.getcwd() + "\\dataset_to_train\\User"
+
+
 
 cam = cv2.VideoCapture(0)
 cam.set(3, 1280) # set video width
@@ -45,7 +47,7 @@ while(True):
 
         # Save the captured image into the datasets folder
         cv2.imwrite(path + str(face_id) + '\\user.' + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
-        # cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        # cv2.imwrite("dataset_to_train/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
 
         cv2.imshow('image', img)
 

@@ -1,0 +1,5 @@
+
+*.jpg
+FacialRecognition/datasetLearn
+FacialRecognition/dataset_to_train
+venv

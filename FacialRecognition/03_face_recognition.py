@@ -1,6 +1,6 @@
 ''''
 Real Time Face Recogition
-	==> Each face stored on dataset/ dir, should have a unique numeric integer ID as 1, 2, 3, etc                       
+	==> Each face stored on dataset_to_train/ dir, should have a unique numeric integer ID as 1, 2, 3, etc
 	==> LBPH computed dataModel (trained faces) should be on trainer/ dir
 Based on original code by Anirban Kar: https://github.com/thecodacus/Face-Recognition    
 
@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 import os 
 
-model_path = "C:\\Users\\Jany\\Documents\\GitHub\\OpenCV-Face-Recognition\\data_model\\trainer.yml"
+model_path = os.getcwd() + "\\data_model\\trainer.yml"
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read(model_path)
